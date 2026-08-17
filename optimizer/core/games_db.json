@@ -1,0 +1,35 @@
+{
+  "games": [
+    {
+      "id": "dota2",
+      "name": "Dota 2",
+      "icon": "🎮",
+      "search_paths": ["steamapps/common/dota 2 beta/game/dota"],
+      "config_file": "cfg/autoexec.cfg",
+      "format": "autoexec",
+      "use_steam_userdata": false,
+      "use_autoexec_only": true,
+      "settings": [
+        {"id": "gpu_mem_level", "cmd": "gpu_mem_level", "label": "Texture Quality", "type": "dropdown", "options": ["Low", "Medium", "High"], "default": "Medium", "values": {"Low": "0", "Medium": "1", "High": "2"}},
+        {"id": "gpu_level", "cmd": "gpu_level", "label": "Graphics Quality", "type": "dropdown", "options": ["Low", "Medium", "High", "Ultra"], "default": "Medium", "values": {"Low": "0", "Medium": "1", "High": "2", "Ultra": "3"}},
+        {"id": "shadow_quality", "cmd": "cl_globallight_shadow_mode", "label": "Shadow Quality", "type": "dropdown", "options": ["Low", "Medium", "High"], "default": "Medium", "values": {"Low": "0", "Medium": "1", "High": "2"}},
+        {"id": "vsync", "cmd": "mat_vsync", "label": "Vertical Sync", "type": "checkbox", "default": false, "values": {"false": "0", "true": "1"}},
+        {"id": "fps_max", "cmd": "fps_max", "label": "Max FPS", "type": "slider", "min": 0, "max": 300, "default": 0}
+      ]
+    },
+    {
+      "id": "cs2",
+      "name": "CS2",
+      "icon": "🔫",
+      "search_paths": ["steamapps/common/Counter-Strike Global Offensive/game/csgo"],
+      "config_file": "cfg/video.txt",
+      "format": "keyvalue",
+      "settings": [
+        {"id": "fullscreen", "label": "Fullscreen", "type": "checkbox", "default": true},
+        {"id": "resolution_width", "label": "Width", "type": "dropdown", "options": ["1280", "1920", "2560"], "default": "1920"},
+        {"id": "resolution_height", "label": "Height", "type": "dropdown", "options": ["720", "1080", "1440"], "default": "1080"},
+        {"id": "shadow_quality", "label": "Shadow Quality", "type": "dropdown", "options": ["Low", "Medium", "High"], "default": "Medium"}
+      ]
+    }
+  ]
+}

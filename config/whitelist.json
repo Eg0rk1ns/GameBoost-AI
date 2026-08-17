@@ -1,0 +1,41 @@
+{
+  "critical": [
+    "steam.exe",
+    "epicgameslauncher.exe",
+    "gog galaxy",
+    "battle.net",
+    "ea app",
+    "ubisoft connect",
+    "xbox app",
+    "cs2.exe",
+    "dota2.exe",
+    "valorant.exe",
+    "rust.exe",
+    "vgc.exe",
+    "BEService.exe",
+    "EasyAntiCheat.exe"
+  ],
+  "communication": [
+    "discord.exe",
+    "teamspeak3.exe",
+    "guilded.exe",
+    "mumble.exe"
+  ],
+  "peripherals": [
+    "Razer Synapse",
+    "Logitech G Hub",
+    "Corsair iCUE",
+    "SignalRGB"
+  ],
+  "vpn": [
+    "nordvpn.exe",
+    "protonvpn.exe",
+    "windscribe.exe",
+    "vpn.exe"
+  ],
+  "streaming": [
+    "obs64.exe",
+    "streamlabs.exe"
+  ],
+  "user_custom": []
+}

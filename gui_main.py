@@ -1,4 +1,4 @@
-from optimizer.gui.app import OptimizerGUI
+﻿from optimizer.gui.main_window import MainWindow
 
 if __name__ == "__main__":
-    gui = OptimizerGUI()
+    window = MainWindow()

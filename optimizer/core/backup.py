@@ -1,19 +1,26 @@
-import shutil
+﻿import shutil
 from pathlib import Path
 from datetime import datetime
 
 class BackupManager:
-    def __init__(self, game_path: Path, backup_dir: Path = None):
-        self.game_path = game_path
+    def __init__(self, backup_dir: Path = None):
         self.backup_dir = backup_dir or Path("backups")
         self.backup_dir.mkdir(exist_ok=True)
 
     def _get_backup_name(self, file_path: Path) -> str:
-        rel_path = file_path.relative_to(self.game_path)
-        # Объединяем все части пути (без расширения) через подчёркивание
-        base_name = "_".join(rel_path.with_suffix('').parts)
-        suffix = rel_path.suffix
-        return f"{base_name}_{datetime.now().strftime('%Y%m%d_%H%M%S')}{suffix}"
+        # Создаём имя бекапа из полного пути, заменяя разделители на подчёркивания
+        parts = list(file_path.parts)
+        # Убираем диск (например, "D:")
+        if parts and ':' in parts[0]:
+            parts = parts[1:]
+        name_parts = []
+        for p in parts:
+            if p:
+                name_parts.append(p)
+        base = "_".join(name_parts)
+        # Добавляем дату/время
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        return f"{base}_{timestamp}{file_path.suffix}"
 
     def create_backup(self, file_path: Path) -> Path:
         if not file_path.exists():
@@ -23,9 +30,16 @@ class BackupManager:
         return backup_file
 
     def restore_latest(self, file_path: Path) -> bool:
-        rel_path = file_path.relative_to(self.game_path)
-        base_name = "_".join(rel_path.with_suffix('').parts)
-        pattern = f"{base_name}_*{rel_path.suffix}"
+        # Ищем бекапы, которые начинаются с основы пути файла
+        parts = list(file_path.parts)
+        if parts and ':' in parts[0]:
+            parts = parts[1:]
+        name_parts = []
+        for p in parts:
+            if p:
+                name_parts.append(p)
+        base = "_".join(name_parts)
+        pattern = f"{base}_*{file_path.suffix}"
         backups = sorted(self.backup_dir.glob(pattern), reverse=True)
         if not backups:
             return False
@@ -34,7 +48,13 @@ class BackupManager:
         return True
 
     def list_backups(self, file_path: Path) -> list:
-        rel_path = file_path.relative_to(self.game_path)
-        base_name = "_".join(rel_path.with_suffix('').parts)
-        pattern = f"{base_name}_*{rel_path.suffix}"
+        parts = list(file_path.parts)
+        if parts and ':' in parts[0]:
+            parts = parts[1:]
+        name_parts = []
+        for p in parts:
+            if p:
+                name_parts.append(p)
+        base = "_".join(name_parts)
+        pattern = f"{base}_*{file_path.suffix}"
         return sorted(self.backup_dir.glob(pattern), reverse=True)
